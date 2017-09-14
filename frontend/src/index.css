@@ -1,0 +1,71 @@
+.categories a.active {
+  border-bottom: 2px solid;
+  margin-bottom: 5px;
+}
+
+.posts {
+  list-style: none;
+  padding: 0;
+}
+
+.posts .post {
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.posts .post .info {
+  align-self: center;
+}
+
+.posts .votes {
+  margin-right: 1rem;
+}
+
+.votes {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+}
+
+.votes .control {
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.posts .votes .control {
+  font-size: 1.3rem;
+}
+
+.posts .votes .score {
+  font-size: 2rem;
+}
+
+.post .body {
+  margin-top: 10px;
+}
+
+.post .details {
+  margin-bottom: 20px;
+}
+
+.post .votes .control {
+  font-size: 1.1rem;
+}
+
+.post .votes .score {
+  font-size: 1.6rem;
+}
+
+.overlay {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  background-color: rgba(0, 0, 0, 0.75);
+}
