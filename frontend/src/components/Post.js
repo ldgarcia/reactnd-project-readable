@@ -3,7 +3,7 @@ import { Link, Redirect } from 'react-router-dom'
 import moment from 'moment'
 
 import PostVotes from '../containers/PostVotes'
-import CommentList from './CommentList'
+import CommentList from '../containers/CommentList'
 
 const Post = ({ post, comments, shouldRedirect, openEditPostModal, deletePost }) => (
   <div className="post">
@@ -23,10 +23,10 @@ const Post = ({ post, comments, shouldRedirect, openEditPostModal, deletePost })
             <p className="card-text body">
               { post.body }
             </p>
-            <button className="card-link btn btn-sm btn-default" onClick={ e => openEditPostModal(post) }>
+            <button className="card-link btn btn-sm btn-secondary" onClick={ e => openEditPostModal(post) }>
               Edit
             </button>
-            <button className="card-link btn btn-sm btn-default" onClick={ e => deletePost(post.id) }>
+            <button className="card-link btn btn-sm btn-secondary" onClick={ e => deletePost(post.id) }>
               Delete
             </button>
           </div>

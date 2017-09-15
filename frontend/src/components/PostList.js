@@ -31,7 +31,6 @@ class PostList extends Component {
             <li key={index} className="post">
               <PostVotes post={ post } />
               <div className="info">
-                <span className="rank">{ index+1 }.</span>
                 <strong className="title">
                   <Link to={`/${post.category}/${post.id}/`}>
                     {post.title}
@@ -40,10 +39,10 @@ class PostList extends Component {
                 <p className="details">
                   posted by { post.author } to <Link to={ `/${post.category}/` }>{ post.category } </Link> on { moment(post.timestamp).format('llll') }
                   &nbsp;<Link to={`/${post.category}/${post.id}/`}>{ post.comments || 0} comments</Link>
-                  &nbsp;<button className="btn btn-sm btn-default" onClick={ e => openEditPostModal(post) }>
+                  &nbsp;<button className="btn btn-sm btn-secondary" onClick={ e => openEditPostModal(post) }>
                     Edit
                   </button>&nbsp;
-                  <button className="btn btn-sm btn-default" onClick={ e => deletePost(post.id) }>
+                  <button className="btn btn-sm btn-secondary" onClick={ e => deletePost(post.id) }>
                     Delete
                   </button>
                 </p>
@@ -52,7 +51,7 @@ class PostList extends Component {
           ))}
         </ol>
         { ui.loadingPostsError === true && (
-          <div className="alert alert-primary" role="alert">
+          <div className="alert alert-danger" role="alert">
             There was an error loading the posts.
           </div>
         )}
