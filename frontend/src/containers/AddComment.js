@@ -27,7 +27,6 @@ class AddCommentContainer extends Component {
     this.props.addCommentRequest()
     return CommentsAPI.add(this.props.form)
       .then(comment => {
-        console.log(comment)
         this.props.addCommentSuccess(comment)
         this.props.closeAddCommentModal()
       })
