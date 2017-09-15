@@ -1,5 +1,8 @@
 # Readable App
 
+[Project overview](https://classroom.udacity.com/nanodegrees/nd019/parts/7b1b9b53-cd0c-49c9-ae6d-7d03d020d672/modules/66bc9ba3-7fda-4d49-b032-d885da838499/lessons/7367dda1-ee03-4032-8f2d-16e238ce7c04/concepts/701c627c-d73a-4b31-bd58-024ada7669e2)
+| [Rubric](https://review.udacity.com/#!/rubrics/1017/view)
+
 ## Installing and running the app
 
 1. Clone the repo
