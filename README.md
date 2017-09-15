@@ -2,11 +2,59 @@
 
 ## Installing and running the app
 
-* Install and start the API server:
-    - `cd api-server`
-    - `yarn install`
-    - `node server`
-* Install and start the frontend:
-    - `cd frontend`
-    - `yarn install`
-    - `yarn start`
+1. Clone the repo
+````
+git clone https://github.com/ldgarcia/reactnd-project-readable
+````
+
+2. Install and start the API server:
+````
+cd api-server
+npm install
+node server
+````
+
+3. Install and start the frontend:
+````
+cd frontend
+npm install
+npm start
+````
+
+## Future improvements
+
+### State tree design
+I think it would be better to have the tree as shown in figure B in order to simplify the update logic in the reducers. Originally, I gave preference to the design in figure A, because it allowed me to update all necessary state for an action in a single reducer (i.e. update in a single place comments state and ui state when adding a new comment) and also because it was _apparently simpler_ for imports and for binding the action creators (i.e. `bindActionCreators(postsActionCreators, dispatch)` instead of `bindActionCreators({...postsActionCreators, ...formsActionCreators, ...uiActionCreators }, dispatch)`).
+
+Figure A:
+````
+{
+  categories: [],
+  comments: {
+    comments: [],
+    forms: {},
+    ui: {}
+  }
+}
+````
+
+Figure B:
+````
+{
+  categories: [],
+  posts: [],
+  comments: [],
+  ui: {},
+  forms: {}
+}
+````
+
+## Bibliografy
+
+* [Async Action Creators](http://redux.js.org/docs/recipes/ReducingBoilerplate.html#async-action-creators) - The pattern (request, success, failure) for defining actions for async requests was learned here.
+
+* [Presentational and Container Components](http://redux.js.org/docs/basics/UsageWithReact.html#presentational-and-container-components) - The pattern of separating components into _presentational components_ and _containers_ was learned here.
+
+* [Redux: Refactoring the entry point](https://egghead.io/lessons/javascript-redux-refactoring-the-entry-point) - The pattern of having a function to generate the store was learned here. Also the idea of having a `Root` component to simplify `index.js`.
+
+* [Blocked Updates](https://reacttraining.com/react-router/core/guides/redux-integration/blocked-updates) - `NavLink` components weren't updating, so I had to wrap in various container components with `withRouter`.
