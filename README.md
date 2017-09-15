@@ -8,6 +8,7 @@
 1. Clone the repo
 ````
 git clone https://github.com/ldgarcia/reactnd-project-readable
+cd reactnd-project-readable
 ````
 
 2. Install and start the API server:
@@ -17,7 +18,7 @@ npm install
 node server
 ````
 
-3. Install and start the frontend:
+3. In another terminal window, install and start the frontend:
 ````
 cd frontend
 npm install
