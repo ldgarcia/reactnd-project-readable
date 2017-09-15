@@ -3,17 +3,17 @@ import * as actions from '../actions/posts'
 const initialState = {
   posts: [],
   forms: {
-    'sort': {
+    sort: {
       by: 'SORT_BY_SCORE',
       order: 'DESC',
     },
-    'add': {
+    add: {
       title: '',
       body: '',
       author: '',
       category: ''
     },
-    'edit': {
+    edit: {
       id: null,
       title: '',
       body: '',
@@ -136,7 +136,7 @@ const posts = (state = initialState, action) => {
           return action.post
         })
       }
-    case actions.FORM_INPUT_CHANGE:
+    case actions.POST_FORM_INPUT_CHANGE:
       return {
         ...state,
         forms: {

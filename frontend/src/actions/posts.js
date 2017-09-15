@@ -151,12 +151,12 @@ export const closeEditPostModal = () => ({
   type: CLOSE_EDIT_POST_MODAL
 })
 
-export const FORM_INPUT_CHANGE = 'FORM_INPUT_CHANGE'
+export const POST_FORM_INPUT_CHANGE = 'POST_FORM_INPUT_CHANGE'
 
 export const formInputChange = (form, event) => {
   const { name, value } = event.target
   return {
-    type: FORM_INPUT_CHANGE,
+    type: POST_FORM_INPUT_CHANGE,
     form,
     name,
     value
