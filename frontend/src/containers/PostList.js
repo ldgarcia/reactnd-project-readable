@@ -72,7 +72,7 @@ class PostListContainer extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    category: ownProps.match.params.category,
+    category: ownProps.match.params.category || '',
     posts: state.posts.posts.map(post => {
       return {...post, comments: state.comments.comments.filter(comment => comment.parentId === post.id).length }
     }),

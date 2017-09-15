@@ -8,7 +8,16 @@ import PostVotes from '../containers/PostVotes'
 
 class PostList extends Component {
   render() {
-    const { posts, ui, sortForm, formInputChange, deletePost, openAddPostModal, openEditPostModal } = this.props
+    const {
+      posts,
+      ui,
+      category,
+      sortForm,
+      formInputChange,
+      openAddPostModal,
+      openEditPostModal,
+      deletePost
+    } = this.props
     return (
       <div>
         <div className="row">
@@ -20,7 +29,7 @@ class PostList extends Component {
             />
           </div>
           <div className="col-lg-4 text-right">
-            <button className="btn btn-primary" type="button" onClick={ openAddPostModal }>
+            <button className="btn btn-primary" type="button" onClick={ e => openAddPostModal(category) }>
               Add post
             </button>
           </div>

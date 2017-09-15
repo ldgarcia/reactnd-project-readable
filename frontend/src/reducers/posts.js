@@ -153,6 +153,13 @@ const posts = (state = initialState, action) => {
         ui: {
           ...state.ui,
           addPostModalIsOpen: true
+        },
+        forms: {
+          ...state.forms,
+          add: {
+            ...state.forms.add,
+            category: action.defaultCategory
+          }
         }
       }
     case actions.CLOSE_ADD_POST_MODAL:

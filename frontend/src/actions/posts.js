@@ -131,8 +131,9 @@ export const editPostFailure = exception => ({
 export const OPEN_ADD_POST_MODAL = 'OPEN_ADD_POST_MODAL'
 export const CLOSE_ADD_POST_MODAL = 'CLOSE_ADD_POST_MODAL'
 
-export const openAddPostModal = () => ({
-  type: OPEN_ADD_POST_MODAL
+export const openAddPostModal = defaultCategory => ({
+  type: OPEN_ADD_POST_MODAL,
+  defaultCategory
 })
 
 export const closeAddPostModal = () => ({
