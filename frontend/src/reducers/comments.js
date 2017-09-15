@@ -20,9 +20,9 @@ const initialState = {
   },
   ui: {
     addCommentModalIsOpen: false,
-    addCommentSubmitButtonIsEnabled: false,
+    addCommentSubmitButtonIsEnabled: true,
     editCommentModalIsOpen: false,
-    editCommentSubmitButtonIsEnabled: false
+    editCommentSubmitButtonIsEnabled: true
   }
 }
 
@@ -61,7 +61,7 @@ const comments = (state = initialState, action) => {
         ...state,
         ui: {
           ...state.ui,
-          addCommentSubmitButtonIsEnabled: false
+          addCommentSubmitButtonIsEnabled: true
         }
       }
     case actions.EDIT_COMMENT_REQUEST:
@@ -69,7 +69,7 @@ const comments = (state = initialState, action) => {
         ...state,
         ui: {
           ...state.ui,
-          editCommentModalIsOpen: false
+          editCommentSubmitButtonIsEnabled: false
         }
       }
     case actions.EDIT_COMMENT_SUCCESS:
@@ -81,7 +81,7 @@ const comments = (state = initialState, action) => {
         ],
         ui: {
           ...state.ui,
-          editCommentModalIsOpen: true
+          editCommentSubmitButtonIsEnabled: true
         }
       }
     case actions.EDIT_COMMENT_FAILURE:
@@ -89,7 +89,7 @@ const comments = (state = initialState, action) => {
         ...state,
         ui: {
           ...state.ui,
-          editCommentModalIsOpen: false
+          editCommentSubmitButtonIsEnabled: true
         }
       }
 
