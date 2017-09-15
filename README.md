@@ -64,6 +64,6 @@ Redirect invalid paths for the category and post views either to the root view o
 
 * [Redux: Refactoring the entry point](https://egghead.io/lessons/javascript-redux-refactoring-the-entry-point) - The pattern of having a function to generate the store was learned here. Also the idea of having a `Root` component to simplify `index.js`.
 
-* [Blocked Updates](https://reacttraining.com/react-router/core/guides/redux-integration/blocked-updates) - `NavLink` components weren't updating, so I had to wrap in various container components with `withRouter`.
+* [Blocked Updates](https://reacttraining.com/react-router/core/guides/redux-integration/blocked-updates) - Learned about `withRouter` in order to debug a problem with `NavLink` updates.
 
 * [Programmatically navigate using react router](https://stackoverflow.com/questions/31079081/programmatically-navigate-using-react-router) - Learned how to use the `history` api.
