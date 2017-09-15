@@ -33,7 +33,7 @@ const Post = ({ post, comments, shouldRedirect, openEditPostModal, deletePost })
         </div>
       </div>
     </div>
-    <CommentList comments={ comments } />
+    <CommentList comments={ comments } parentId={ post.id } />
   </div>
 )
 

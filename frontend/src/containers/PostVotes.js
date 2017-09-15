@@ -17,7 +17,7 @@ class PostVotesContainer extends Component {
   vote = option => {
     const { post, votePostRequest, votePostSuccess, votePostFailure } = this.props
     votePostRequest(post.id, option)
-    return PostsAPI.votePost(post.id, option)
+    return PostsAPI.vote(post.id, option)
       .then(post => votePostSuccess(post))
       .catch(exception => votePostFailure(exception))
   }

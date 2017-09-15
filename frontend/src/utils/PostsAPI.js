@@ -14,7 +14,7 @@ export const getByCategory = category =>
   fetch(`${prefix}/${category}/posts/`, { headers })
   .then( res => res.json())
 
-export const getPost = postId =>
+export const get = postId =>
   fetch(`${prefix}/posts/${postId}`, { headers })
   .then( res => res.json())
 
@@ -22,7 +22,7 @@ export const getComments = postId =>
   fetch(`${prefix}/posts/${postId}/comments/`, { headers })
   .then( res => res.json())
 
-export const addPost = ({ title, author, category, body }) =>
+export const add = ({ title, author, category, body }) =>
   fetch(`${prefix}/posts/`, {
     method: 'POST',
     body: JSON.stringify({
@@ -37,7 +37,7 @@ export const addPost = ({ title, author, category, body }) =>
   })
   .then( res => res.json())
 
-export const editPost = ({ id, title, body }) =>
+export const edit = ({ id, title, body }) =>
   fetch(`${prefix}/posts/${id}/`, {
     method: 'PUT',
     body: JSON.stringify({ title, body }),
@@ -52,7 +52,7 @@ export const disable = postId =>
   })
   .then( res => res.json())
 
-export const votePost = (postId, option) =>
+export const vote = (postId, option) =>
   fetch(`${prefix}/posts/${postId}/`, {
     method: 'POST',
     body: JSON.stringify({ option }),

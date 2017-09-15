@@ -26,7 +26,7 @@ class PostContainer extends Component {
 
   fetchPost = postId => {
     this.props.fetchPostRequest()
-    PostsAPI.getPost(postId)
+    PostsAPI.get(postId)
     .then(post => {
       this.fetchPostComments(post)
       this.props.fetchPostSuccess(post)

@@ -28,7 +28,7 @@ class AddPostContainer extends Component {
   editPost = event => {
     event.preventDefault()
     this.props.editPostRequest()
-    return PostsAPI.editPost(this.props.form)
+    return PostsAPI.edit(this.props.form)
       .then(post => {
         this.props.editPostSuccess(post)
         this.props.closeEditPostModal()
