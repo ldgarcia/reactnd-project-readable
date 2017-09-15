@@ -8,14 +8,14 @@
   padding: 0;
 }
 
-.posts .post {
+.posts .post, .comments .comment {
   margin-bottom: 10px;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
 }
 
-.posts .post .info {
+.posts .info, .comments .info {
   align-self: center;
 }
 
@@ -59,6 +59,18 @@
 
 .post .votes .score {
   font-size: 1.6rem;
+}
+
+.comment .votes {
+  margin-right: 5px;
+}
+
+.comment .votes .control {
+  font-size: 1rem;
+}
+
+.comment .votes .score {
+  font-size: 1.2rem;
 }
 
 .overlay {
