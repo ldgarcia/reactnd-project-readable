@@ -55,7 +55,7 @@ Figure B:
 ### Redirections
 Redirect invalid paths for the category and post views either to the root view or to a custom 404 view.
 
-## Bibliografy
+## Bibliography
 
 * [Async Action Creators](http://redux.js.org/docs/recipes/ReducingBoilerplate.html#async-action-creators) - The pattern (request, success, failure) for defining actions for async requests was learned here.
 
