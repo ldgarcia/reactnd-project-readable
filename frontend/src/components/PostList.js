@@ -38,7 +38,7 @@ class PostList extends Component {
                 </strong>
                 <p className="details">
                   posted by { post.author } to <Link to={ `/${post.category}/` }>{ post.category } </Link> on { moment(post.timestamp).format('llll') }
-                  &nbsp;<Link to={`/${post.category}/${post.id}/`}>{ post.comments || 0} comments</Link>
+                  &nbsp;<Link to={`/${post.category}/${post.id}/`}>{ post.comments } { post.comments !== 1 ? 'comments' : 'comment' }</Link>
                   &nbsp;<button className="btn btn-sm btn-secondary" onClick={ e => openEditPostModal(post) }>
                     Edit
                   </button>&nbsp;
