@@ -52,6 +52,9 @@ Figure B:
 }
 ````
 
+### Redirections
+Redirect invalid paths for the category and post views either to the root view or to a custom 404 view.
+
 ## Bibliografy
 
 * [Async Action Creators](http://redux.js.org/docs/recipes/ReducingBoilerplate.html#async-action-creators) - The pattern (request, success, failure) for defining actions for async requests was learned here.
@@ -61,3 +64,5 @@ Figure B:
 * [Redux: Refactoring the entry point](https://egghead.io/lessons/javascript-redux-refactoring-the-entry-point) - The pattern of having a function to generate the store was learned here. Also the idea of having a `Root` component to simplify `index.js`.
 
 * [Blocked Updates](https://reacttraining.com/react-router/core/guides/redux-integration/blocked-updates) - `NavLink` components weren't updating, so I had to wrap in various container components with `withRouter`.
+
+* [Programmatically navigate using react router](https://stackoverflow.com/questions/31079081/programmatically-navigate-using-react-router) - Learned how to use the `history` api.

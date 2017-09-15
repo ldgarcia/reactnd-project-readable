@@ -8,12 +8,10 @@ import * as postsActionCreators from '../actions/posts'
 import Post from '../components/Post'
 
 class PostContainer extends Component {
-  /* We need to load a post individually in case an
-     user opens a post detail view directly
-  */
+
   componentDidMount = () => {
-    const { shouldLoadPost, postId } = this.props
-    if (shouldLoadPost) {
+    const { post, postId } = this.props
+    if (typeof post.id === 'undefined') {
       this.fetchPost(postId)
     }
   }
@@ -28,8 +26,16 @@ class PostContainer extends Component {
     this.props.fetchPostRequest()
     PostsAPI.get(postId)
     .then(post => {
-      this.fetchPostComments(post)
-      this.props.fetchPostSuccess(post)
+      if (typeof post.id !== 'undefined') {
+        this.fetchPostComments(post)
+        this.props.fetchPostSuccess(post)
+      }
+      else {
+        /* Post doesn't exist or is deleted,
+           so redirect to homepage.
+         */
+        this.props.history.push('/')
+      }
     })
     .catch(exception => this.props.fetchPostFailure(exception))
   }
@@ -45,21 +51,29 @@ class PostContainer extends Component {
   deletePost = postId => {
     this.props.deletePostRequest()
     return PostsAPI.disable(postId)
-      .then(post => this.props.deletePostSuccess(post))
+      .then(post => {
+        this.props.deletePostSuccess(post)
+        this.props.history.push('/')
+      })
       .catch(exception => this.props.deletePostFailure(exception))
   }
 
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const { category, postId } = ownProps.match.params
+  /* We need to add logic to load a post individually in case an
+     user opens a post detail view directly in the browser
+     (i.e. open link in new tab)
+  */
+  const { history, match } = ownProps
+  const { category, postId } = match.params
   const postIndex = state.posts.posts.findIndex(post => post.id === postId)
-  const shouldLoadPost = postIndex === -1
-  const post = !shouldLoadPost ? state.posts.posts[postIndex] : {}
-  const comments = !shouldLoadPost ? state.comments.comments.filter(comment => comment.parentId === post.id): []
+  const post = postIndex !== -1 ? state.posts.posts[postIndex] : {}
+  const comments = postIndex !== -1 ? state.comments.comments.filter(comment => comment.parentId === post.id): []
 
   return {
-    shouldLoadPost,
+    history,
+    category,
     postId,
     post,
     comments

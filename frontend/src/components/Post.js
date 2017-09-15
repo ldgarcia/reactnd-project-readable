@@ -1,11 +1,11 @@
 import React from 'react'
-import { Link, Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import moment from 'moment'
 
 import PostVotes from '../containers/PostVotes'
 import CommentList from '../containers/CommentList'
 
-const Post = ({ post, comments, shouldRedirect, openEditPostModal, deletePost }) => (
+const Post = ({ post, comments, openEditPostModal, deletePost }) => (
   <div className="post">
     <div className="card details">
       <div className="card-block">
