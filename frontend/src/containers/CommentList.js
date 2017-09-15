@@ -15,12 +15,12 @@ class CommentListContainer extends Component {
   deleteComment = id => {
     this.props.deleteCommentRequest()
     CommentsAPI.disable(id)
-      .then(comment => {
-        this.props.deleteCommentSuccess(comment)
-      })
-      .catch(exception => {
-        this.props.deleteCommentsFailure(exception)
-      })
+    .then(comment => {
+      this.props.deleteCommentSuccess(comment)
+    })
+    .catch(exception => {
+      this.props.deleteCommentsFailure(exception)
+    })
   }
 }
 

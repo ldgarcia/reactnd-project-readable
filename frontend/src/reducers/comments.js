@@ -9,9 +9,20 @@ const initialState = {
       order: 'DESC',
     },
     add: {
+      parentId: null,
+      body: '',
+      author: '',
     },
     edit: {
+      id: null,
+      body: ''
     },
+  },
+  ui: {
+    addCommentModalIsOpen: false,
+    addCommentSubmitButtonIsEnabled: false,
+    editCommentModalIsOpen: false,
+    editCommentSubmitButtonIsEnabled: false
   }
 }
 
@@ -25,6 +36,63 @@ const comments = (state = initialState, action) => {
           ...action.comments
         ]
       }
+    case actions.ADD_COMMENT_REQUEST:
+      return {
+        ...state,
+        ui: {
+          ...state.ui,
+          addCommentSubmitButtonIsEnabled: false
+        }
+      }
+    case actions.ADD_COMMENT_SUCCESS:
+      return {
+        ...state,
+        comments: [
+          ...state.comments,
+          action.comment
+        ],
+        ui: {
+          ...state.ui,
+          addCommentSubmitButtonIsEnabled: true
+        }
+      }
+    case actions.ADD_COMMENT_FAILURE:
+      return {
+        ...state,
+        ui: {
+          ...state.ui,
+          addCommentSubmitButtonIsEnabled: false
+        }
+      }
+    case actions.EDIT_COMMENT_REQUEST:
+      return {
+        ...state,
+        ui: {
+          ...state.ui,
+          editCommentModalIsOpen: false
+        }
+      }
+    case actions.EDIT_COMMENT_SUCCESS:
+      return {
+        ...state,
+        comments: [
+          ...state.comments.filter(comment => comment.id !== action.comment.id),
+          action.comment
+        ],
+        ui: {
+          ...state.ui,
+          editCommentModalIsOpen: true
+        }
+      }
+    case actions.EDIT_COMMENT_FAILURE:
+      return {
+        ...state,
+        ui: {
+          ...state.ui,
+          editCommentModalIsOpen: false
+        }
+      }
+
     case actions.DELETE_COMMENT_SUCCESS:
       return {
         ...state,
@@ -49,6 +117,66 @@ const comments = (state = initialState, action) => {
           }
         }
       }
+    case actions.OPEN_ADD_COMMENT_MODAL:
+      return {
+        ...state,
+        ui: {
+          ...state.ui,
+          addCommentModalIsOpen: true
+        },
+        forms: {
+          ...state.forms,
+          add: {
+            ...state.forms.add,
+            parentId: action.parentId
+          }
+        }
+      }
+    case actions.CLOSE_ADD_COMMENT_MODAL:
+      return {
+        ...state,
+        ui: {
+          ...state.ui,
+          addCommentModalIsOpen: false
+        },
+        forms: {
+          ...state.forms,
+          add: {
+            ...initialState.forms.add
+          }
+        }
+      }
+    case actions.OPEN_EDIT_COMMENT_MODAL:
+      return {
+        ...state,
+        ui: {
+          ...state.ui,
+          editCommentModalIsOpen: true
+        },
+        forms: {
+          ...state.forms,
+          edit: {
+            ...state.forms.edit,
+            id: action.comment.id,
+            body: action.comment.body
+          }
+        }
+      }
+    case actions.CLOSE_EDIT_COMMENT_MODAL:
+      return {
+        ...state,
+        ui: {
+          ...state.ui,
+          editCommentModalIsOpen: false
+        },
+        forms: {
+          ...state.forms,
+          edit: {
+            ...initialState.forms.edit
+          }
+        }
+      }
+
     default:
       return state;
   }
