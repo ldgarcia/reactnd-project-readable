@@ -71,7 +71,7 @@ const PostForm = props => {
             </div>
           </div>
           <div className="modal-footer">
-            <button type="submit" className="btn btn-primary" enabled={ ui.submitButtonIsEnabled }>Submit</button>
+            <button type="submit" className="btn btn-primary" disabled={ !ui.submitButtonIsEnabled }>Submit</button>
             <button type="reset" className="btn btn-secondary">Close</button>
           </div>
         </form>
