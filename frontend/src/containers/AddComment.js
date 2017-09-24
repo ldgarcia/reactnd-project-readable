@@ -14,7 +14,6 @@ class AddCommentContainer extends Component {
   }
 
   onFormSubmit = (event) => {
-    console.log('Adding comment: ', this.props.form)
     event.preventDefault()
     this.props.addComment(this.props.form)
     this.props.addCommentEnd()
