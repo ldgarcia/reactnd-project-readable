@@ -73,6 +73,11 @@
   font-size: 1.2rem;
 }
 
+.not-found {
+  background-color: #333;
+  border-color: #333;
+}
+
 .overlay {
   position: fixed;
   top: 0px;
