@@ -1,4 +1,4 @@
-import * as actions from '../actions/posts'
+import * as types from '../actions/types'
 
 const initialState = {
   posts: [],
@@ -30,7 +30,7 @@ const initialState = {
 
 const posts = (state = initialState, action) => {
   switch (action.type) {
-    case actions.FETCH_POSTS_REQUEST:
+    case types.FETCH_POSTS_REQUEST:
       return {
         ...state,
         ui: {
@@ -38,7 +38,7 @@ const posts = (state = initialState, action) => {
           loadingPostsError: false
         }
       }
-    case actions.FETCH_POSTS_SUCCESS:
+    case types.FETCH_POSTS_SUCCESS:
       return {
         ...state,
         posts: action.posts,
@@ -47,7 +47,7 @@ const posts = (state = initialState, action) => {
           loadingPostsError: false
         }
       }
-    case actions.FETCH_POSTS_FAILURE:
+    case types.FETCH_POSTS_FAILURE:
       return {
         ...state,
         ui: {
@@ -55,7 +55,7 @@ const posts = (state = initialState, action) => {
           loadingPostsError: true
         }
       }
-    case actions.FETCH_POST_SUCCESS:
+    case types.FETCH_POST_SUCCESS:
       return {
         ...state,
         posts: [
@@ -63,7 +63,7 @@ const posts = (state = initialState, action) => {
           action.post
         ]
       }
-    case actions.ADD_POST_REQUEST:
+    case types.ADD_POST_REQUEST:
       return {
         ...state,
         ui: {
@@ -71,7 +71,7 @@ const posts = (state = initialState, action) => {
           addPostSubmitButtonIsEnabled: false
         }
       }
-    case actions.ADD_POST_SUCCESS:
+    case types.ADD_POST_SUCCESS:
       return {
         ...state,
         posts: [
@@ -83,7 +83,7 @@ const posts = (state = initialState, action) => {
           addPostSubmitButtonIsEnabled: true
         }
       }
-    case actions.ADD_POST_FAILURE:
+    case types.ADD_POST_FAILURE:
       return {
         ...state,
         ui: {
@@ -91,7 +91,7 @@ const posts = (state = initialState, action) => {
           addPostSubmitButtonIsEnabled: true
         }
       }
-    case actions.EDIT_POST_REQUEST:
+    case types.EDIT_POST_REQUEST:
       return {
         ...state,
         ui: {
@@ -99,7 +99,7 @@ const posts = (state = initialState, action) => {
           editPostSubmitButtonIsEnabled: false
         }
       }
-    case actions.EDIT_POST_SUCCESS:
+    case types.EDIT_POST_SUCCESS:
       return {
         ...state,
         posts: state.posts.map((post, index) => {
@@ -113,7 +113,7 @@ const posts = (state = initialState, action) => {
           editPostSubmitButtonIsEnabled: true
         }
       }
-    case actions.EDIT_POST_FAILURE:
+    case types.EDIT_POST_FAILURE:
       return {
         ...state,
         ui: {
@@ -121,12 +121,12 @@ const posts = (state = initialState, action) => {
           editPostSubmitButtonIsEnabled: true
         }
       }
-    case actions.DELETE_POST_SUCCESS:
+    case types.DELETE_POST_SUCCESS:
       return {
         ...state,
         posts : state.posts.filter(post => post.id !== action.post.id)
       }
-    case actions.VOTE_POST_SUCCESS:
+    case types.VOTE_POST_SUCCESS:
       return {
         ...state,
         posts: state.posts.map((post, index) => {
@@ -136,7 +136,7 @@ const posts = (state = initialState, action) => {
           return action.post
         })
       }
-    case actions.POST_FORM_INPUT_CHANGE:
+    case types.POST_FORM_INPUT_CHANGE:
       return {
         ...state,
         forms: {
@@ -147,7 +147,7 @@ const posts = (state = initialState, action) => {
           }
         }
       }
-    case actions.OPEN_ADD_POST_MODAL:
+    case types.OPEN_ADD_POST_MODAL:
       return {
         ...state,
         ui: {
@@ -162,7 +162,7 @@ const posts = (state = initialState, action) => {
           }
         }
       }
-    case actions.CLOSE_ADD_POST_MODAL:
+    case types.CLOSE_ADD_POST_MODAL:
       return {
         ...state,
         forms: {
@@ -176,7 +176,7 @@ const posts = (state = initialState, action) => {
           addPostModalIsOpen: false
         }
       }
-    case actions.OPEN_EDIT_POST_MODAL:
+    case types.OPEN_EDIT_POST_MODAL:
       const { post } = action
       return {
         ...state,
@@ -193,7 +193,7 @@ const posts = (state = initialState, action) => {
           editPostModalIsOpen: true
         }
       }
-    case actions.CLOSE_EDIT_POST_MODAL:
+    case types.CLOSE_EDIT_POST_MODAL:
       return {
         ...state,
         forms: {

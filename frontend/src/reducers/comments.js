@@ -1,5 +1,4 @@
-import { FETCH_COMMENTS_SUCCESS } from '../actions/posts'
-import * as actions from '../actions/comments'
+import * as types from '../actions/types'
 
 const initialState = {
   comments: [],
@@ -28,7 +27,7 @@ const initialState = {
 
 const comments = (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_COMMENTS_SUCCESS:
+    case types.FETCH_COMMENTS_SUCCESS:
       return {
         ...state,
         comments: [
@@ -36,7 +35,7 @@ const comments = (state = initialState, action) => {
           ...action.comments
         ]
       }
-    case actions.ADD_COMMENT_REQUEST:
+    case types.ADD_COMMENT_REQUEST:
       return {
         ...state,
         ui: {
@@ -44,7 +43,7 @@ const comments = (state = initialState, action) => {
           addCommentSubmitButtonIsEnabled: false
         }
       }
-    case actions.ADD_COMMENT_SUCCESS:
+    case types.ADD_COMMENT_SUCCESS:
       return {
         ...state,
         comments: [
@@ -56,7 +55,7 @@ const comments = (state = initialState, action) => {
           addCommentSubmitButtonIsEnabled: true
         }
       }
-    case actions.ADD_COMMENT_FAILURE:
+    case types.ADD_COMMENT_FAILURE:
       return {
         ...state,
         ui: {
@@ -64,7 +63,7 @@ const comments = (state = initialState, action) => {
           addCommentSubmitButtonIsEnabled: true
         }
       }
-    case actions.EDIT_COMMENT_REQUEST:
+    case types.EDIT_COMMENT_REQUEST:
       return {
         ...state,
         ui: {
@@ -72,7 +71,7 @@ const comments = (state = initialState, action) => {
           editCommentSubmitButtonIsEnabled: false
         }
       }
-    case actions.EDIT_COMMENT_SUCCESS:
+    case types.EDIT_COMMENT_SUCCESS:
       return {
         ...state,
         comments: [
@@ -84,7 +83,7 @@ const comments = (state = initialState, action) => {
           editCommentSubmitButtonIsEnabled: true
         }
       }
-    case actions.EDIT_COMMENT_FAILURE:
+    case types.EDIT_COMMENT_FAILURE:
       return {
         ...state,
         ui: {
@@ -93,12 +92,12 @@ const comments = (state = initialState, action) => {
         }
       }
 
-    case actions.DELETE_COMMENT_SUCCESS:
+    case types.DELETE_COMMENT_SUCCESS:
       return {
         ...state,
         comments: state.comments.filter(comment => comment.id !== action.comment.id)
       }
-    case actions.VOTE_COMMENT_SUCCESS:
+    case types.VOTE_COMMENT_SUCCESS:
       return {
         ...state,
         comments: [
@@ -106,7 +105,7 @@ const comments = (state = initialState, action) => {
           action.comment
         ]
       }
-    case actions.COMMENT_FORM_INPUT_CHANGE:
+    case types.COMMENT_FORM_INPUT_CHANGE:
       return {
         ...state,
         forms: {
@@ -117,7 +116,7 @@ const comments = (state = initialState, action) => {
           }
         }
       }
-    case actions.OPEN_ADD_COMMENT_MODAL:
+    case types.OPEN_ADD_COMMENT_MODAL:
       return {
         ...state,
         ui: {
@@ -132,7 +131,7 @@ const comments = (state = initialState, action) => {
           }
         }
       }
-    case actions.CLOSE_ADD_COMMENT_MODAL:
+    case types.CLOSE_ADD_COMMENT_MODAL:
       return {
         ...state,
         ui: {
@@ -146,7 +145,7 @@ const comments = (state = initialState, action) => {
           }
         }
       }
-    case actions.OPEN_EDIT_COMMENT_MODAL:
+    case types.OPEN_EDIT_COMMENT_MODAL:
       return {
         ...state,
         ui: {
@@ -162,7 +161,7 @@ const comments = (state = initialState, action) => {
           }
         }
       }
-    case actions.CLOSE_EDIT_COMMENT_MODAL:
+    case types.CLOSE_EDIT_COMMENT_MODAL:
       return {
         ...state,
         ui: {

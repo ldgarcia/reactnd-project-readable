@@ -1,6 +1,6 @@
 import {
   FETCH_CATEGORIES_SUCCESS,
-} from '../actions/categories'
+} from '../actions/types'
 
 const initialState = []
 

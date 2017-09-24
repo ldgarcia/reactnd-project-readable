@@ -1,17 +1,15 @@
-export const FETCH_CATEGORIES_REQUEST = 'FETCH_CATEGORIES_REQUEST'
-export const FETCH_CATEGORIES_SUCCESS = 'FETCH_CATEGORIES_SUCCESS'
-export const FETCH_CATEGORIES_FAILURE = 'FETCH_CATEGORIES_FAILURE'
+import * as types from './types'
 
 export const fetchCategoriesRequest = () => ({
-  type: FETCH_CATEGORIES_REQUEST,
+  type: types.FETCH_CATEGORIES_REQUEST,
 })
 
 export const fetchCategoriesSuccess = categories => ({
-  type: FETCH_CATEGORIES_SUCCESS,
+  type: types.FETCH_CATEGORIES_SUCCESS,
   categories
 })
 
 export const fetchCategoriesFailure = exception => ({
-  type: FETCH_CATEGORIES_FAILURE,
+  type: types.FETCH_CATEGORIES_FAILURE,
   exception
 })
