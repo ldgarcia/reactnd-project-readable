@@ -32,19 +32,17 @@ class EditPostContainer extends Component {
         handleFormSubmit={this.onFormSubmit}
         handleInputChange={this.onInputChange}
         handleModalClose={this.onModalClose}
-        ui={{
-          modalIsOpen: this.props.ui.editPostModalIsOpen,
-          submitButtonIsEnabled: this.props.ui.editPostSubmitButtonIsEnabled,
-        }}
+        modalIsOpen={this.props.ui.editPostModalIsOpen}
+        submitButtonIsEnabled={this.props.ui.editPostSubmitButtonIsEnabled}
       />
     )
   }
 }
 
-const mapStateToProps = state => ({
-  categories: state.categories,
-  ui: state.ui,
-  form: state.forms.editPost,
+const mapStateToProps = ({categories, forms, ui}) => ({
+  categories,
+  form: forms.editPost,
+  ui,
 })
 
 const mapDispatchToProps = dispatch => {

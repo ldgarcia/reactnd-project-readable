@@ -22,14 +22,14 @@ class PostContainer extends Component {
 
 }
 
-const mapStateToProps = (state, ownProps) => {
-  const { category, postId } = ownProps.match.params
-  const postIndex = state.posts.findIndex(post => post.id === postId && post.category === category)
-  const post = postIndex !== -1 ? state.posts[postIndex] : {}
-  const comments = postIndex !== -1 ? state.comments.filter(comment => comment.parentId === post.id): []
+const mapStateToProps = ({posts, comments}, {match}) => {
+  const postIndex = posts.findIndex(post => {
+    return match.params.postId === post.id
+      && match.params.category === post.category
+    })
   return {
-    post,
-    comments,
+    post: postIndex !== -1 ? posts[postIndex] : {},
+    comments: postIndex !== -1 ? comments.filter(comment => match.params.postId === comment.parentId): []
   }
 }
 

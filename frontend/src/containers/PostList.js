@@ -29,16 +29,16 @@ class PostListContainer extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = ({ posts, comments, forms, ui}) => {
   return {
-    posts: state.posts.map(post => {
+    posts: posts.map(post => {
       return {
         ...post,
-        comments: state.comments.filter(comment => comment.parentId === post.id).length
+        comments: comments.filter(comment => comment.parentId === post.id).length
       }
     }),
-    sortForm: state.forms.sort,
-    ui: state.ui,
+    sortForm: forms.sort,
+    ui,
   }
 }
 

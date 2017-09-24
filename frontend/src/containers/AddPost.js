@@ -33,19 +33,17 @@ class AddPostContainer extends Component {
         handleFormSubmit={this.onFormSubmit}
         handleInputChange={this.onInputChange}
         handleModalClose={this.onModalClose}
-        ui={{
-          modalIsOpen: this.props.ui.addPostModalIsOpen,
-          submitButtonIsEnabled: this.props.ui.addPostSubmitButtonIsEnabled,
-        }}
+        modalIsOpen={this.props.ui.addPostModalIsOpen}
+        submitButtonIsEnabled={this.props.ui.addPostSubmitButtonIsEnabled}
       />
     )
   }
 }
 
-const mapStateToProps = state => ({
-  categories: state.categories,
-  ui: state.ui,
-  form: state.forms.addPost,
+const mapStateToProps = ({categories, forms, ui}) => ({
+  categories,
+  form: forms.addPost,
+  ui,
 })
 
 const mapDispatchToProps = dispatch => {

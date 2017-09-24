@@ -15,9 +15,9 @@ class CommentListContainer extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = ({forms}) => {
   return {
-    sortForm: state.forms.sort
+    sortForm: forms.sort
   }
 }
 

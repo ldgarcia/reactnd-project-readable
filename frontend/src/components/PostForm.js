@@ -9,14 +9,16 @@ function PostForm(props) {
     handleFormSubmit,
     handleInputChange,
     handleModalClose,
-    ui } = props
+    modalIsOpen,
+    submitButtonIsEnabled,
+  } = props
   const title = action === 'edit' ? 'Edit post' : 'Add post'
   return (
     <Modal
       className="modal-dialog"
       overlayClassName="overlay"
       contentLabel={title}
-      isOpen={ui.modalIsOpen}
+      isOpen={modalIsOpen}
       onRequestClose={handleModalClose}
     >
       <div className="modal-content">
@@ -99,7 +101,7 @@ function PostForm(props) {
             <button
               type="submit"
               className="btn btn-primary"
-              disabled={!ui.submitButtonIsEnabled}
+              disabled={!submitButtonIsEnabled}
             >
               Submit
             </button>
