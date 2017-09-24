@@ -1,15 +1,17 @@
 import * as types from './types'
+import * as categoriesAPI from '../utils/CategoriesAPI'
 
-export const fetchCategoriesRequest = () => ({
-  type: types.FETCH_CATEGORIES_REQUEST,
-})
-
-export const fetchCategoriesSuccess = categories => ({
-  type: types.FETCH_CATEGORIES_SUCCESS,
-  categories
-})
-
-export const fetchCategoriesFailure = exception => ({
-  type: types.FETCH_CATEGORIES_FAILURE,
-  exception
-})
+export function fetchCategories() {
+  return dispatch => {
+    dispatch({ type: types.FETCH_CATEGORIES_REQUEST, })
+    categoriesAPI.getAll()
+    .then(data => dispatch({
+      type: types.FETCH_CATEGORIES_SUCCESS,
+      categories: data.categories,
+    }))
+    .catch(exception => dispatch({
+      type: types.FETCH_CATEGORIES_FAILURE,
+      exception,
+    }))
+  }
+}

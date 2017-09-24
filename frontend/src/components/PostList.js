@@ -4,41 +4,56 @@ import moment from 'moment'
 
 import getSortFunction from '../utils/sort'
 import SortForm from '../components/SortForm'
-import PostVotes from '../containers/PostVotes'
+import Votes from '../components/Votes'
 
 class PostList extends Component {
   render() {
     const {
+      match,
       posts,
       ui,
-      category,
       sortForm,
-      formInputChange,
-      openAddPostModal,
-      openEditPostModal,
-      deletePost
+      onInputChange,
+      openModal,
+      closeModal,
+      loadFormData,
+      deletePost,
+      votePost,
     } = this.props
     return (
       <div>
         <div className="row">
           <div className="col-lg-8">
-            Showing { posts.length } of { posts.length } { posts.length === 1 ? 'post' : 'posts' }
+            Showing {posts.length} of {posts.length} {posts.length === 1 ? 'post' : 'posts'}
             <SortForm
-              form={ sortForm }
-              handleInputChange={ formInputChange.bind(this, 'sort') }
+              form={sortForm}
+              handleInputChange={onInputChange.bind(this, 'sort')}
             />
           </div>
           <div className="col-lg-4 text-right">
-            <button className="btn btn-primary" type="button" onClick={ e => openAddPostModal(category) }>
+            <button
+              className="btn btn-primary"
+              type="button"
+              onClick={() => {
+                loadFormData('addPost', {
+                  category: match.params.category,
+                })
+                openModal('addPost')
+              }}
+            >
               Add post
             </button>
           </div>
         </div>
         <hr />
         <ol className="posts">
-          { posts.sort(getSortFunction(sortForm)).map((post, index) => (
-            <li key={index} className="post">
-              <PostVotes post={ post } />
+          { posts.sort(getSortFunction(sortForm)).map((post) => (
+            <li key={post.id} className="post">
+              <Votes
+                id={post.id}
+                score={post.voteScore}
+                onVote={votePost}
+              />
               <div className="info">
                 <strong className="title">
                   <Link to={`/${post.category}/${post.id}/`}>
@@ -46,12 +61,28 @@ class PostList extends Component {
                   </Link>
                 </strong>
                 <p className="details">
-                  posted by { post.author } to <Link to={ `/${post.category}/` }>{ post.category } </Link> on { moment(post.timestamp).format('llll') }
-                  &nbsp;<Link to={`/${post.category}/${post.id}/`}>{ post.comments } { post.comments !== 1 ? 'comments' : 'comment' }</Link>
-                  &nbsp;<button className="btn btn-sm btn-secondary" onClick={ e => openEditPostModal(post) }>
+                  posted by {post.author} to <Link to={`/${post.category}/`}>{post.category} </Link> on {moment(post.timestamp).format('llll')}
+                  &nbsp;
+                  <Link
+                    to={`/${post.category}/${post.id}/`}
+                  >
+                    {post.comments} {post.comments !== 1 ? 'comments' : 'comment'}
+                  </Link>
+                  &nbsp;
+                  <button
+                    className="btn btn-sm btn-secondary"
+                    onClick={() => {
+                      loadFormData('editPost', post)
+                      openModal('editPost')
+                    }}
+                  >
                     Edit
-                  </button>&nbsp;
-                  <button className="btn btn-sm btn-secondary" onClick={ e => deletePost(post.id) }>
+                  </button>
+                  &nbsp;
+                  <button
+                    className="btn btn-sm btn-secondary"
+                    onClick={() => deletePost(post.id)}
+                  >
                     Delete
                   </button>
                 </p>

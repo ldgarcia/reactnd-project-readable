@@ -35,8 +35,8 @@ class AddCommentContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-  ui: state.comments.ui,
-  form: state.comments.forms.add,
+  ui: state.ui,
+  form: state.forms.addComment,
 })
 
 const mapDispatchToProps = dispatch => {

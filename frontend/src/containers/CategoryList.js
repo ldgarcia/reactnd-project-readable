@@ -3,14 +3,14 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 
-import * as categoriesActionCreators from '../actions/categories'
+import * as categoryActions from '../actions/categories'
 import * as categoriesAPI from '../utils/CategoriesAPI'
 
 import CategoryList from '../components/CategoryList'
 
 class CategoryListContainer extends Component {
   componentDidMount() {
-      this.fetchCategories()
+      this.props.fetchCategories()
   }
 
   render() {
@@ -19,13 +19,6 @@ class CategoryListContainer extends Component {
       <CategoryList categories={categories} />
     )
   }
-
-  fetchCategories() {
-    this.props.fetchCategoriesRequest()
-    return categoriesAPI.getAll()
-      .then(data => this.props.fetchCategoriesSuccess(data.categories))
-      .catch(exception => this.props.fetchCategoriesFailure(exception))
-  }
 }
 
 const mapStateToProps = state => ({
@@ -33,7 +26,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators(categoriesActionCreators, dispatch)
+  return bindActionCreators(categoryActions, dispatch)
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CategoryListContainer))

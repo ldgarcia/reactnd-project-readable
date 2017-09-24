@@ -1,15 +1,18 @@
 import {
   FETCH_CATEGORIES_SUCCESS,
+  FETCH_CATEGORIES_FAILURE,
 } from '../actions/types'
 
 const initialState = []
 
-const categories = (state = initialState, action) => {
+function categories(state = initialState, action) {
   switch (action.type) {
     case FETCH_CATEGORIES_SUCCESS:
       return action.categories
+    case FETCH_CATEGORIES_FAILURE:
+      return initialState
     default:
-      return state;
+      return state
   }
 }
 

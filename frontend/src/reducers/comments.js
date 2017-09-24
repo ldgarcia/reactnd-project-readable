@@ -3,19 +3,6 @@ import * as types from '../actions/types'
 const initialState = {
   comments: [],
   forms: {
-    sort: {
-      by: 'SORT_BY_SCORE',
-      order: 'DESC',
-    },
-    add: {
-      parentId: null,
-      body: '',
-      author: '',
-    },
-    edit: {
-      id: null,
-      body: ''
-    },
   },
   ui: {
     addCommentModalIsOpen: false,
@@ -27,13 +14,18 @@ const initialState = {
 
 const comments = (state = initialState, action) => {
   switch (action.type) {
-    case types.FETCH_COMMENTS_SUCCESS:
+    case types.FETCH_POSTS_SUCCESS:
+      return {
+        ...state,
+        comments: action.comments,
+      }
+    case types.FETCH_POST_SUCCESS:
       return {
         ...state,
         comments: [
-          ...state.comments.filter(comment => comment.parentId !== action.parentId),
+          ...state.comments.filter(comment => comment.parentId !== action.post.id),
           ...action.comments
-        ]
+        ],
       }
     case types.ADD_COMMENT_REQUEST:
       return {
@@ -91,7 +83,6 @@ const comments = (state = initialState, action) => {
           editCommentSubmitButtonIsEnabled: true
         }
       }
-
     case types.DELETE_COMMENT_SUCCESS:
       return {
         ...state,
@@ -175,7 +166,6 @@ const comments = (state = initialState, action) => {
           }
         }
       }
-
     default:
       return state;
   }

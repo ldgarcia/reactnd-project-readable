@@ -6,4 +6,4 @@ const headers = getDefaultHeaders(token)
 
 export const getAll = () =>
   fetch(`${prefix}/categories`, { headers })
-  .then(res => res.json())
+  .then(res => { return res.json() })

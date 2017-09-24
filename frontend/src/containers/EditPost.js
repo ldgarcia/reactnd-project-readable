@@ -2,21 +2,31 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import * as PostsAPI from '../utils/PostsAPI'
-import * as postsActionCreators from '../actions/posts'
+import * as postActions from '../actions/posts'
+import * as formActions from '../actions/forms'
+import * as uiActions from '../actions/ui'
 import PostForm from '../components/PostForm'
 
-class AddPostContainer extends Component {
+class EditPostContainer extends Component {
+  onFormSubmit = () => {
+    this.props.editPost(this.props.form)
+    this.onModalClose()
+  }
 
-  render = () => {
+  onModalClose = () => {
+    this.props.resetForm('editPost')
+    this.props.closeModal('editPost')
+  }
+
+  render() {
     return (
       <PostForm
         action='edit'
-        form={ this.props.form }
-        categories={ this.props.categories }
-        handleFormSubmit={ this.editPost }
-        handleInputChange={ this.props.formInputChange.bind(this, 'edit') }
-        handleModalClose={ this.props.closeEditPostModal }
+        form={this.props.form}
+        categories={this.props.categories}
+        handleFormSubmit={this.onFormSubmit}
+        handleInputChange={this.props.onInputChange.bind(this, 'editPost')}
+        handleModalClose={this.onModalClose}
         ui={{
           modalIsOpen: this.props.ui.editPostModalIsOpen,
           submitButtonIsEnabled: this.props.ui.editPostSubmitButtonIsEnabled,
@@ -24,33 +34,20 @@ class AddPostContainer extends Component {
       />
     )
   }
-
-  editPost = event => {
-    event.preventDefault()
-    this.props.editPostRequest()
-    return PostsAPI.edit(this.props.form)
-      .then(post => {
-        this.props.editPostSuccess(post)
-        this.props.closeEditPostModal()
-      })
-      .catch(exception => this.props.editPostFailure(exception))
-  }
-
-  handleInputChange = event => {
-    const { name, value } = event.target
-    this.props.editPostFormChange(name, value)
-  }
-
 }
 
 const mapStateToProps = state => ({
   categories: state.categories,
-  ui: state.posts.ui,
-  form: state.posts.forms.edit,
+  ui: state.ui,
+  form: state.forms.editPost,
 })
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators(postsActionCreators, dispatch)
+  return bindActionCreators({
+    ...postActions,
+    ...formActions,
+    ...uiActions,
+  }, dispatch)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddPostContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(EditPostContainer)

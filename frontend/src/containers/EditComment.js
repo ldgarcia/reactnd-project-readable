@@ -35,8 +35,8 @@ class EditCommentContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-  ui: state.comments.ui,
-  form: state.comments.forms.edit,
+  ui: state.ui,
+  form: state.forms.editComment,
 })
 
 const mapDispatchToProps = dispatch => {

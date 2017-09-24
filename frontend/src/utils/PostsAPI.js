@@ -7,7 +7,7 @@ const token = getToken()
 const headers = getDefaultHeaders(token)
 
 export const getAll = () =>
-  fetch(`${prefix}/posts`, { headers })
+  fetch(`${prefix}/posts/`, { headers })
   .then(res => res.json())
 
 export const getByCategory = category =>

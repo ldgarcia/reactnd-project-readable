@@ -1,7 +1,7 @@
 import React from 'react'
 import Modal from 'react-modal'
 
-const PostForm = props => {
+function PostForm(props) {
   const {
     action,
     form,
@@ -22,20 +22,42 @@ const PostForm = props => {
       <div className="modal-content">
         <div className="modal-header">
           <h5 className="modal-title">{ title }</h5>
-          <button type="button" className="close" aria-label="Close" onClick={ handleModalClose }>
+          <button
+            type="button"
+            className="close"
+            aria-label="Close"
+            onClick={ handleModalClose }
+          >
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form onSubmit={ handleFormSubmit } onReset={ handleModalClose }>
+        <form
+          onSubmit={(e) => {e.preventDefault(); handleFormSubmit()}}
+          onReset={handleModalClose}
+        >
           <div className="modal-body">
             <div className="form-group">
               <label>Title</label>
-              <input name="title" type="text" className="form-control" value={ form.title } onChange={ handleInputChange } required />
+              <input
+                name="title"
+                type="text"
+                className="form-control"
+                value={form.title}
+                onChange={(e) => handleInputChange(e.target.name, e.target.value)}
+                required
+              />
             </div>
             { action === 'add' && (
               <div className="form-group">
                 <label>Author</label>
-                <input name="author" type="text" className="form-control" value={ form.author } onChange={ handleInputChange } required />
+                <input
+                  name="author"
+                  type="text"
+                  className="form-control"
+                  value={form.author}
+                  onChange={(e) => handleInputChange(e.target.name, e.target.value)}
+                  required
+                />
               </div>
             )}
             { action === 'add' && (
@@ -44,13 +66,16 @@ const PostForm = props => {
                 <select
                   className="form-control"
                   name="category"
-                  value={ form.category }
-                  onChange={ handleInputChange }
+                  value={form.category}
+                  onChange={(e) => handleInputChange(e.target.name, e.target.value)}
                   required
                 >
                   <option value="">Select a category</option>
                   { categories.map(category => (
-                    <option key={ category.path } value={ category.path }>
+                    <option
+                      key={ category.path }
+                      value={ category.path }
+                    >
                       { category.name }
                     </option>
                   ))}
@@ -64,14 +89,20 @@ const PostForm = props => {
                 className="form-control"
                 name="body"
                 rows="4"
-                value={ form.body }
-                onChange={ handleInputChange }
+                value={form.body}
+                onChange={(e) => handleInputChange(e.target.name, e.target.value)}
                 required
               />
             </div>
           </div>
           <div className="modal-footer">
-            <button type="submit" className="btn btn-primary" disabled={ !ui.submitButtonIsEnabled }>Submit</button>
+            <button
+              type="submit"
+              className="btn btn-primary"
+              disabled={ !ui.submitButtonIsEnabled }
+            >
+              Submit
+            </button>
             <button type="reset" className="btn btn-secondary">Close</button>
           </div>
         </form>
