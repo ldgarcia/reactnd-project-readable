@@ -2,35 +2,40 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import * as CommentsAPI from '../utils/CommentsAPI'
-import * as commentsActionCreators from '../actions/comments'
+import * as commentActions from '../actions/comments'
+import * as formActions from '../actions/forms'
+import * as uiActions from '../actions/ui'
 import CommentForm from '../components/CommentForm'
 
 class AddCommentContainer extends Component {
+  onInputChange = (event) => {
+    const { name, value } = event.target
+    this.props.onInputChange('addComment', name, value)
+  }
 
-  render = () => {
+  onFormSubmit = (event) => {
+    console.log('Adding comment: ', this.props.form)
+    event.preventDefault()
+    this.props.addComment(this.props.form)
+    this.props.addCommentEnd()
+  }
+
+  onCloseModal = () => {
+    this.props.addCommentEnd()
+  }
+
+  render() {
     return (
       <CommentForm
         action='add'
-        form={ this.props.form }
-        handleFormSubmit={ this.addComment }
-        handleInputChange={ this.props.formInputChange.bind(this, 'add') }
-        handleModalClose={ this.props.closeAddCommentModal }
-        modalIsOpen={ this.props.ui.addCommentModalIsOpen }
-        submitButtonIsEnabled={ this.props.ui.addCommentSubmitButtonIsEnabled }
+        form={this.props.form}
+        handleFormSubmit={this.onFormSubmit}
+        handleInputChange={this.onInputChange}
+        handleModalClose={this.onCloseModal}
+        modalIsOpen={this.props.ui.addCommentModalIsOpen}
+        submitButtonIsEnabled={this.props.ui.addCommentSubmitButtonIsEnabled}
       />
     )
-  }
-
-  addComment = event => {
-    event.preventDefault()
-    this.props.addCommentRequest()
-    return CommentsAPI.add(this.props.form)
-      .then(comment => {
-        this.props.addCommentSuccess(comment)
-        this.props.closeAddCommentModal()
-      })
-      .catch(exception => this.props.addCommentFailure(exception))
   }
 }
 
@@ -40,7 +45,10 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators(commentsActionCreators, dispatch)
+  return bindActionCreators({
+    ...commentActions,
+    ...formActions,
+    ...uiActions}, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddCommentContainer)

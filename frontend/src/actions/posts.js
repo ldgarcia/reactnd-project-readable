@@ -56,7 +56,10 @@ export function fetchPosts(category) {
 
 export function votePost(postId, option) {
   return dispatch => {
-    dispatch({ type: types.VOTE_POST_REQUEST, })
+    dispatch({
+      type: types.VOTE_POST_REQUEST,
+      postId,
+    })
     postsAPI.vote(postId, option)
     .then(post => dispatch({
       type: types.VOTE_POST_SUCCESS,
@@ -66,6 +69,33 @@ export function votePost(postId, option) {
       type: types.VOTE_POST_FAILURE,
       exception,
     }))
+  }
+}
+
+export function addPostStart(category) {
+  return dispatch => {
+    dispatch({
+      type: types.FORM_LOAD_DATA,
+      name: 'addPost',
+      data: { category, }
+    })
+    dispatch({
+      type: types.OPEN_MODAL,
+      name: 'addPost'
+    })
+  }
+}
+
+export function addPostEnd() {
+  return dispatch => {
+    dispatch({
+      type: types.FORM_RESET,
+      name: 'addPost',
+    })
+    dispatch({
+      type: types.CLOSE_MODAL,
+      name: 'addPost',
+    })
   }
 }
 
@@ -81,6 +111,33 @@ export function addPost(post) {
       type: types.ADD_POST_FAILURE,
       exception,
     }))
+  }
+}
+
+export function editPostStart(post) {
+  return dispatch => {
+    dispatch({
+      type: types.FORM_LOAD_DATA,
+      name: 'editPost',
+      data: post,
+    })
+    dispatch({
+      type: types.OPEN_MODAL,
+      name: 'editPost'
+    })
+  }
+}
+
+export function editPostEnd() {
+  return dispatch => {
+    dispatch({
+      type: types.FORM_RESET,
+      name: 'editPost',
+    })
+    dispatch({
+      type: types.CLOSE_MODAL,
+      name: 'editPost',
+    })
   }
 }
 
@@ -101,7 +158,10 @@ export function editPost(post) {
 
 export function deletePost(postId) {
   return dispatch => {
-    dispatch({ type: types.DELETE_POST_REQUEST, })
+    dispatch({
+      type: types.DELETE_POST_REQUEST,
+      postId,
+    })
     postsAPI.disable(postId)
     .then(post => dispatch({
       type: types.DELETE_POST_SUCCESS,

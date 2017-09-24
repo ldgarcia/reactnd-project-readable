@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
 
 import * as postActions from '../actions/posts'
 import * as uiActions from '../actions/ui'
@@ -27,7 +26,7 @@ const mapStateToProps = (state, ownProps) => {
   const { category, postId } = ownProps.match.params
   const postIndex = state.posts.findIndex(post => post.id === postId && post.category === category)
   const post = postIndex !== -1 ? state.posts[postIndex] : {}
-  const comments = postIndex !== -1 ? state.comments.comments.filter(comment => comment.parentId === post.id): []
+  const comments = postIndex !== -1 ? state.comments.filter(comment => comment.parentId === post.id): []
   return {
     post,
     comments,

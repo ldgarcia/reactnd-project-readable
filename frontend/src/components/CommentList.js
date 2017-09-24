@@ -4,31 +4,32 @@ import getSortFunction from '../utils/sort'
 import Comment from './Comment'
 import SortForm from './SortForm'
 
-const CommentList = props => {
+function CommentList(props) {
   const {
     parentId,
     comments,
     sortForm,
-    openAddCommentModal,
-    openEditCommentModal,
-    formInputChange,
-    deleteComment
+    onInputChange,
+    addCommentStart,
+    editCommentStart,
+    voteComment,
+    deleteComment,
   } = props
   return (
     <div className="comments">
       <div className="row">
         <div className="col-lg-8">
-          Showing { comments.length } of { comments.length } { comments.length === 1 ? 'comment' : 'comments' }
+          Showing {comments.length} of {comments.length} {comments.length === 1 ? 'comment' : 'comments'}
           <SortForm
-            form={ sortForm }
-            handleInputChange={ formInputChange.bind(this, 'sort') }
+            form={sortForm}
+            handleInputChange={onInputChange.bind(this, 'sort')}
           />
         </div>
         <div className="col-lg-4 text-right">
           <button
             className="btn btn-primary"
             type="button"
-            onClick={ e => openAddCommentModal(parentId) }
+            onClick={() => addCommentStart(parentId)}
           >
             Add comment
           </button>
@@ -37,10 +38,11 @@ const CommentList = props => {
       <hr />
       { comments.sort(getSortFunction(sortForm)).map(comment => (
         <Comment
-          key={ comment.id }
-          comment={ comment }
-          editComment={ openEditCommentModal }
-          deleteComment={ deleteComment }
+          key={comment.id}
+          comment={comment}
+          deleteComment={deleteComment}
+          voteComment={voteComment}
+          editCommentStart={editCommentStart}
         />
       ))}
     </div>

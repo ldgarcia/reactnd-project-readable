@@ -12,15 +12,15 @@ export const getAll = () =>
 
 export const getByCategory = category =>
   fetch(`${prefix}/${category}/posts/`, { headers })
-  .then( res => res.json())
+  .then(res => res.json())
 
 export const get = postId =>
   fetch(`${prefix}/posts/${postId}`, { headers })
-  .then( res => res.json())
+  .then(res => res.json())
 
 export const getComments = postId =>
   fetch(`${prefix}/posts/${postId}/comments/`, { headers })
-  .then( res => res.json())
+  .then(res => res.json())
 
 export const add = ({ title, author, category, body }) =>
   fetch(`${prefix}/posts/`, {
@@ -35,7 +35,7 @@ export const add = ({ title, author, category, body }) =>
     }),
     headers
   })
-  .then( res => res.json())
+  .then(res => res.json())
 
 export const edit = ({ id, title, body }) =>
   fetch(`${prefix}/posts/${id}/`, {
@@ -43,14 +43,14 @@ export const edit = ({ id, title, body }) =>
     body: JSON.stringify({ title, body }),
     headers
   })
-  .then( res => res.json())
+  .then(res => res.json())
 
 export const disable = postId =>
   fetch(`${prefix}/posts/${postId}`, {
     method: 'DELETE',
     headers
   })
-  .then( res => res.json())
+  .then(res => res.json())
 
 export const vote = (postId, option) =>
   fetch(`${prefix}/posts/${postId}/`, {
@@ -58,4 +58,4 @@ export const vote = (postId, option) =>
     body: JSON.stringify({ option }),
     headers
   })
-  .then( res => res.json())
+  .then(res => res.json())

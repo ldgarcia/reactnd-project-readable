@@ -50,34 +50,6 @@ function forms(state = initialState, action) {
           ...action.data,
         }
       }
-    case types.OPEN_ADD_POST_MODAL:
-      return {
-        ...state,
-        addPost: {
-          ...state.addPost,
-          category: action.defaultCategory,
-        }
-      }
-    case types.CLOSE_ADD_POST_MODAL:
-      return {
-        ...state,
-        addPost: initialState.addPost,
-      }
-    case types.OPEN_EDIT_POST_MODAL:
-      const { post } = action
-      return {
-        ...state,
-        editPost: {
-          id: post.id,
-          title: post.title,
-          body: post.body,
-        }
-      }
-    case types.CLOSE_EDIT_POST_MODAL:
-      return {
-        ...state,
-        editPost: initialState.editPost,
-      }
     default:
       return state
   }

@@ -8,14 +8,19 @@ import * as uiActions from '../actions/ui'
 import PostForm from '../components/PostForm'
 
 class EditPostContainer extends Component {
-  onFormSubmit = () => {
+  onInputChange = (event) => {
+    const { name, value } = event.target
+    this.props.onInputChange('editPost', name, value)
+  }
+
+  onFormSubmit = (event) => {
+    event.preventDefault()
     this.props.editPost(this.props.form)
-    this.onModalClose()
+    this.props.editPostEnd()
   }
 
   onModalClose = () => {
-    this.props.resetForm('editPost')
-    this.props.closeModal('editPost')
+    this.props.editPostEnd()
   }
 
   render() {
@@ -25,7 +30,7 @@ class EditPostContainer extends Component {
         form={this.props.form}
         categories={this.props.categories}
         handleFormSubmit={this.onFormSubmit}
-        handleInputChange={this.props.onInputChange.bind(this, 'editPost')}
+        handleInputChange={this.onInputChange}
         handleModalClose={this.onModalClose}
         ui={{
           modalIsOpen: this.props.ui.editPostModalIsOpen,

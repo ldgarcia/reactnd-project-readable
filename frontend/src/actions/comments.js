@@ -1,87 +1,130 @@
 import * as types from './types'
+import * as commentsAPI from '../utils/CommentsAPI'
 
-export const addCommentRequest = () => ({
-  type: types.ADD_COMMENT_REQUEST
-})
-
-export const addCommentSuccess = comment => ({
-  type: types.ADD_COMMENT_SUCCESS,
-  comment
-})
-
-export const addCommentFailure = exception => ({
-  type: types.ADD_COMMENT_FAILURE,
-  exception
-})
-
-export const editCommentRequest = () => ({
-  type: types.EDIT_COMMENT_REQUEST
-})
-
-export const editCommentSuccess = comment => ({
-  type: types.EDIT_COMMENT_SUCCESS,
-  comment
-})
-
-export const editCommentFailure = exception => ({
-  type: types.EDIT_COMMENT_FAILURE,
-  exception
-})
-
-export const deleteCommentRequest = () => ({
-  type: types.DELETE_COMMENT_REQUEST
-})
-
-export const deleteCommentSuccess = comment => ({
-  type: types.DELETE_COMMENT_SUCCESS,
-  comment
-})
-
-export const deleteCommentFailure = exception => ({
-  type: types.DELETE_COMMENT_FAILURE,
-  exception
-})
-
-export const voteCommentRequest = (postId, option) => ({
-  type: types.VOTE_COMMENT_REQUEST,
-  postId,
-  option
-})
-
-export const voteCommentSuccess = comment => ({
-  type: types.VOTE_COMMENT_SUCCESS,
-  comment
-})
-
-export const voteCommentFailure = exception => ({
-  type: types.VOTE_COMMENT_FAILURE,
-  exception
-})
-
-export const formInputChange = (form, event) => {
-  const { name, value } = event.target
-  return {
-    type: types.COMMENT_FORM_INPUT_CHANGE,
-    form,
-    name,
-    value
+export function voteComment(commentId, option) {
+  return dispatch => {
+    dispatch({
+      type: types.VOTE_COMMENT_REQUEST,
+      commentId,
+    })
+    commentsAPI.vote(commentId, option)
+    .then(comment => {
+      dispatch({
+        type: types.VOTE_COMMENT_SUCCESS,
+        comment,
+      })
+    })
+    .catch(exception => dispatch({
+      type: types.VOTE_COMMENT_FAILURE,
+      exception,
+    }))
   }
 }
 
-export const openAddCommentModal = parentId => ({
-  type: types.OPEN_ADD_COMMENT_MODAL,
-  parentId,
-})
+export function addCommentStart(parentId) {
+  return dispatch => {
+    dispatch({
+      type: types.FORM_LOAD_DATA,
+      name: 'addComment',
+      data: { parentId, }
+    })
+    dispatch({
+      type: types.OPEN_MODAL,
+      name: 'addComment',
+    })
+  }
+}
 
-export const closeAddCommentModal = () => ({
-  type: types.CLOSE_ADD_COMMENT_MODAL
-})
+export function addCommentEnd() {
+  return dispatch => {
+    dispatch({
+      type: types.FORM_RESET,
+      name: 'addComment',
+    })
+    dispatch({
+      type: types.CLOSE_MODAL,
+      name: 'addComment',
+    })
+  }
+}
 
-export const openEditCommentModal = comment => ({
-  type: types.OPEN_EDIT_COMMENT_MODAL,
-  comment,
-})
+export function addComment(comment) {
+  return dispatch => {
+    dispatch({ type: types.ADD_COMMENT_REQUEST, })
+    commentsAPI.add(comment)
+    .then(comment => {
+      dispatch({
+        type: types.ADD_COMMENT_SUCCESS,
+        comment,
+      })
+      console.log(comment)
+    })
+    .catch(exception => dispatch({
+      type: types.ADD_COMMENT_FAILURE,
+      exception,
+    }))
+  }
+}
 
-export const closeEditCommentModal = () => ({
-  type: types.CLOSE_EDIT_COMMENT_MODAL
-})
+export function editCommentStart(comment) {
+  return dispatch => {
+    dispatch({
+      type: types.FORM_LOAD_DATA,
+      name: 'editComment',
+      data: comment,
+    })
+    dispatch({
+      type: types.OPEN_MODAL,
+      name: 'editComment'
+    })
+  }
+}
+
+export function editCommentEnd() {
+  return dispatch => {
+    dispatch({
+      type: types.FORM_RESET,
+      name: 'editComment',
+    })
+    dispatch({
+      type: types.CLOSE_MODAL,
+      name: 'editComment',
+    })
+  }
+}
+
+export function editComment(comment) {
+  return dispatch => {
+    dispatch({
+      type: types.EDIT_COMMENT_REQUEST,
+      commentId: comment.id,
+    })
+    commentsAPI.edit(comment)
+    .then(comment => dispatch({
+      type: types.EDIT_COMMENT_SUCCESS,
+      comment,
+    }))
+    .catch(exception => dispatch({
+      type: types.EDIT_COMMENT_FAILURE,
+      exception,
+    }))
+  }
+}
+
+export function deleteComment(commentId) {
+  return dispatch => {
+    dispatch({
+      type: types.DELETE_COMMENT_REQUEST,
+      commentId,
+    })
+    commentsAPI.disable(commentId)
+    .then(comment => dispatch({
+      type: types.DELETE_COMMENT_SUCCESS,
+      comment,
+    }))
+    .catch(exception => dispatch({
+      type: types.DELETE_COMMENT_FAILURE,
+      exception,
+    }))
+  }
+}

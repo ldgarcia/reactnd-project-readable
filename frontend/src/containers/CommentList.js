@@ -2,25 +2,16 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import * as commentsActionCreators from '../actions/comments'
-import * as CommentsAPI from '../utils/CommentsAPI'
+import * as commentActions from '../actions/comments'
+import * as formActions from '../actions/forms'
+import * as uiActions from '../actions/ui'
 import CommentList from '../components/CommentList'
 
 class CommentListContainer extends Component {
-
-  render = () => (
-    <CommentList { ...this.props } deleteComment={ this.deleteComment } />
-  )
-
-  deleteComment = id => {
-    this.props.deleteCommentRequest()
-    CommentsAPI.disable(id)
-    .then(comment => {
-      this.props.deleteCommentSuccess(comment)
-    })
-    .catch(exception => {
-      this.props.deleteCommentsFailure(exception)
-    })
+  render() {
+    return (
+      <CommentList { ...this.props } />
+    )
   }
 }
 
@@ -31,7 +22,10 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators(commentsActionCreators, dispatch)
+  return bindActionCreators({
+    ...commentActions,
+    ...formActions,
+    ...uiActions}, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CommentListContainer)

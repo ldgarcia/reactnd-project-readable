@@ -14,9 +14,8 @@ class PostList extends Component {
       ui,
       sortForm,
       onInputChange,
-      openModal,
-      closeModal,
-      loadFormData,
+      addPostStart,
+      editPostStart,
       deletePost,
       votePost,
     } = this.props
@@ -34,12 +33,7 @@ class PostList extends Component {
             <button
               className="btn btn-primary"
               type="button"
-              onClick={() => {
-                loadFormData('addPost', {
-                  category: match.params.category,
-                })
-                openModal('addPost')
-              }}
+              onClick={() => addPostStart(match.params.category)}
             >
               Add post
             </button>
@@ -71,10 +65,7 @@ class PostList extends Component {
                   &nbsp;
                   <button
                     className="btn btn-sm btn-secondary"
-                    onClick={() => {
-                      loadFormData('editPost', post)
-                      openModal('editPost')
-                    }}
+                    onClick={() => editPostStart(post)}
                   >
                     Edit
                   </button>

@@ -9,9 +9,9 @@ function Post(props) {
   const {
     post,
     comments,
-    openEditPostModal,
+    editPostStart,
     votePost,
-    deletePost
+    deletePost,
   } = props
   return (
     <div className="post">
@@ -27,19 +27,21 @@ function Post(props) {
             </div>
             <div className="col-sm-8 col-lg-11">
               <h4 className="card-title">
-                { post.title }
+                {post.title}
               </h4>
               <h6 className="card-subtitle text-muted">
-              posted by { post.author } to
-              <Link to={ `/${post.category}/` }>{ post.category } </Link>
-              on { moment(post.timestamp).format('llll') }
+              posted by { post.author } to&nbsp;
+              <Link to={`/${post.category}/`}>
+                {post.category}
+              </Link>
+              &nbsp;on {moment(post.timestamp).format('llll')}
               </h6>
               <p className="card-text body">
-                { post.body }
+                {post.body}
               </p>
               <button
                 className="card-link btn btn-sm btn-secondary"
-                onClick={(e) => openEditPostModal(post)}
+                onClick={() => editPostStart(post)}
               >
                 Edit
               </button>

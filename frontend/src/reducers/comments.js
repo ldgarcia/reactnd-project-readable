@@ -1,171 +1,31 @@
 import * as types from '../actions/types'
 
-const initialState = {
-  comments: [],
-  forms: {
-  },
-  ui: {
-    addCommentModalIsOpen: false,
-    addCommentSubmitButtonIsEnabled: true,
-    editCommentModalIsOpen: false,
-    editCommentSubmitButtonIsEnabled: true
-  }
-}
+const initialState = []
 
 const comments = (state = initialState, action) => {
   switch (action.type) {
     case types.FETCH_POSTS_SUCCESS:
-      return {
-        ...state,
-        comments: action.comments,
-      }
+      return action.comments
     case types.FETCH_POST_SUCCESS:
-      return {
-        ...state,
-        comments: [
-          ...state.comments.filter(comment => comment.parentId !== action.post.id),
-          ...action.comments
-        ],
-      }
-    case types.ADD_COMMENT_REQUEST:
-      return {
-        ...state,
-        ui: {
-          ...state.ui,
-          addCommentSubmitButtonIsEnabled: false
-        }
-      }
+      return [
+        ...state.filter(comment => comment.parentId !== action.post.id),
+        ...action.comments,
+      ]
     case types.ADD_COMMENT_SUCCESS:
-      return {
+      return [
         ...state,
-        comments: [
-          ...state.comments,
-          action.comment
-        ],
-        ui: {
-          ...state.ui,
-          addCommentSubmitButtonIsEnabled: true
-        }
-      }
-    case types.ADD_COMMENT_FAILURE:
-      return {
-        ...state,
-        ui: {
-          ...state.ui,
-          addCommentSubmitButtonIsEnabled: true
-        }
-      }
-    case types.EDIT_COMMENT_REQUEST:
-      return {
-        ...state,
-        ui: {
-          ...state.ui,
-          editCommentSubmitButtonIsEnabled: false
-        }
-      }
+        action.comment,
+      ]
     case types.EDIT_COMMENT_SUCCESS:
-      return {
-        ...state,
-        comments: [
-          ...state.comments.filter(comment => comment.id !== action.comment.id),
-          action.comment
-        ],
-        ui: {
-          ...state.ui,
-          editCommentSubmitButtonIsEnabled: true
-        }
-      }
-    case types.EDIT_COMMENT_FAILURE:
-      return {
-        ...state,
-        ui: {
-          ...state.ui,
-          editCommentSubmitButtonIsEnabled: true
-        }
-      }
-    case types.DELETE_COMMENT_SUCCESS:
-      return {
-        ...state,
-        comments: state.comments.filter(comment => comment.id !== action.comment.id)
-      }
     case types.VOTE_COMMENT_SUCCESS:
-      return {
-        ...state,
-        comments: [
-          ...state.comments.filter(comment => comment.id !== action.comment.id),
-          action.comment
-        ]
-      }
-    case types.COMMENT_FORM_INPUT_CHANGE:
-      return {
-        ...state,
-        forms: {
-          ...state.forms,
-          [action.form]: {
-            ...state.forms[action.form],
-            [action.name]: action.value
-          }
+      return state.map(comment => {
+        if (comment.id !== action.comment.id) {
+          return comment
         }
-      }
-    case types.OPEN_ADD_COMMENT_MODAL:
-      return {
-        ...state,
-        ui: {
-          ...state.ui,
-          addCommentModalIsOpen: true
-        },
-        forms: {
-          ...state.forms,
-          add: {
-            ...state.forms.add,
-            parentId: action.parentId
-          }
-        }
-      }
-    case types.CLOSE_ADD_COMMENT_MODAL:
-      return {
-        ...state,
-        ui: {
-          ...state.ui,
-          addCommentModalIsOpen: false
-        },
-        forms: {
-          ...state.forms,
-          add: {
-            ...initialState.forms.add
-          }
-        }
-      }
-    case types.OPEN_EDIT_COMMENT_MODAL:
-      return {
-        ...state,
-        ui: {
-          ...state.ui,
-          editCommentModalIsOpen: true
-        },
-        forms: {
-          ...state.forms,
-          edit: {
-            ...state.forms.edit,
-            id: action.comment.id,
-            body: action.comment.body
-          }
-        }
-      }
-    case types.CLOSE_EDIT_COMMENT_MODAL:
-      return {
-        ...state,
-        ui: {
-          ...state.ui,
-          editCommentModalIsOpen: false
-        },
-        forms: {
-          ...state.forms,
-          edit: {
-            ...initialState.forms.edit
-          }
-        }
-      }
+        return action.comment
+      })
+    case types.DELETE_COMMENT_SUCCESS:
+      return state.filter(comment => comment.id !== action.comment.id)
     default:
       return state;
   }

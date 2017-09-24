@@ -15,24 +15,24 @@ function PostForm(props) {
     <Modal
       className="modal-dialog"
       overlayClassName="overlay"
-      contentLabel={ title }
-      isOpen={ ui.modalIsOpen }
-      onRequestClose={ handleModalClose }
+      contentLabel={title}
+      isOpen={ui.modalIsOpen}
+      onRequestClose={handleModalClose}
     >
       <div className="modal-content">
         <div className="modal-header">
-          <h5 className="modal-title">{ title }</h5>
+          <h5 className="modal-title">{title}</h5>
           <button
             type="button"
             className="close"
             aria-label="Close"
-            onClick={ handleModalClose }
+            onClick={handleModalClose}
           >
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <form
-          onSubmit={(e) => {e.preventDefault(); handleFormSubmit()}}
+          onSubmit={handleFormSubmit}
           onReset={handleModalClose}
         >
           <div className="modal-body">
@@ -43,7 +43,7 @@ function PostForm(props) {
                 type="text"
                 className="form-control"
                 value={form.title}
-                onChange={(e) => handleInputChange(e.target.name, e.target.value)}
+                onChange={handleInputChange}
                 required
               />
             </div>
@@ -55,7 +55,7 @@ function PostForm(props) {
                   type="text"
                   className="form-control"
                   value={form.author}
-                  onChange={(e) => handleInputChange(e.target.name, e.target.value)}
+                  onChange={handleInputChange}
                   required
                 />
               </div>
@@ -67,7 +67,7 @@ function PostForm(props) {
                   className="form-control"
                   name="category"
                   value={form.category}
-                  onChange={(e) => handleInputChange(e.target.name, e.target.value)}
+                  onChange={handleInputChange}
                   required
                 >
                   <option value="">Select a category</option>
@@ -90,7 +90,7 @@ function PostForm(props) {
                 name="body"
                 rows="4"
                 value={form.body}
-                onChange={(e) => handleInputChange(e.target.name, e.target.value)}
+                onChange={handleInputChange}
                 required
               />
             </div>
@@ -99,11 +99,16 @@ function PostForm(props) {
             <button
               type="submit"
               className="btn btn-primary"
-              disabled={ !ui.submitButtonIsEnabled }
+              disabled={!ui.submitButtonIsEnabled}
             >
               Submit
             </button>
-            <button type="reset" className="btn btn-secondary">Close</button>
+            <button
+              type="reset"
+              className="btn btn-secondary"
+            >
+              Close
+            </button>
           </div>
         </form>
       </div>

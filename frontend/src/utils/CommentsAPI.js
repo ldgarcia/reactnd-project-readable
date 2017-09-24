@@ -18,7 +18,7 @@ export const add = ({ body, author, parentId }) =>
     }),
     headers
   })
-  .then( res => res.json())
+  .then(res => res.json())
 
 export const edit = ({ id, body }) =>
   fetch(`${prefix}/comments/${id}/`, {
@@ -29,14 +29,14 @@ export const edit = ({ id, body }) =>
     }),
     headers
   })
-  .then( res => res.json())
+  .then(res => res.json())
 
 export const disable = id =>
   fetch(`${prefix}/comments/${id}`, {
     method: 'DELETE',
     headers
   })
-  .then( res => res.json())
+  .then(res => res.json())
 
 export const vote = (id, option) =>
   fetch(`${prefix}/comments/${id}/`, {
@@ -44,4 +44,4 @@ export const vote = (id, option) =>
     body: JSON.stringify({ option }),
     headers
   })
-  .then( res => res.json())
+  .then(res => res.json())

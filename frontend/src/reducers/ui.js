@@ -1,7 +1,6 @@
 import * as types from '../actions/types'
 
 const initialState = {
-  postNotFound: false,
   loadingPostsError: false,
   addPostModalIsOpen: false,
   addPostSubmitButtonIsEnabled: true,
@@ -47,45 +46,27 @@ function ui(state = initialState, action) {
         ...state,
         editPostSubmitButtonIsEnabled: true,
       }
-    case types.OPEN_ADD_POST_MODAL:
+    case types.ADD_COMMENT_REQUEST:
       return {
         ...state,
-        addPostModalIsOpen: true,
+        addCommentSubmitButtonIsEnabled: false,
       }
-    case types.CLOSE_ADD_POST_MODAL:
+    case types.ADD_COMMENT_SUCCESS:
+    case types.ADD_COMMENT_FAILURE:
       return {
         ...state,
-        addPostModalIsOpen: false,
+        addCommentSubmitButtonIsEnabled: true,
       }
-    case types.OPEN_EDIT_POST_MODAL:
+    case types.EDIT_COMMENT_REQUEST:
       return {
         ...state,
-        editPostModalIsOpen: true,
+        editCommentSubmitButtonIsEnabled: false,
       }
-    case types.CLOSE_EDIT_POST_MODAL:
+    case types.EDIT_COMMENT_SUCCESS:
+    case types.EDIT_COMMENT_FAILURE:
       return {
         ...state,
-        editPostModalIsOpen: false,
-      }
-    case types.OPEN_ADD_COMMENT_MODAL:
-      return {
-        ...state,
-        addCommentModalIsOpen: true,
-      }
-    case types.CLOSE_ADD_COMMENT_MODAL:
-      return {
-        ...state,
-        addCommentModalIsOpen: false,
-      }
-    case types.OPEN_EDIT_COMMENT_MODAL:
-      return {
-        ...state,
-        editCommentModalIsOpen: true,
-      }
-    case types.CLOSE_EDIT_COMMENT_MODAL:
-      return {
-        ...state,
-        editCommentModalIsOpen: false,
+        editCommentSubmitButtonIsEnabled: true,
       }
     case types.OPEN_MODAL:
       return {
