@@ -1,5 +1,9 @@
 export const getURL = () => {
-  return `${process.env.SERVER_ORIGIN}:${process.env.SERVER_PORT}` || 'http://localhost:3001'
+  const { SERVER_ORIGIN, SERVER_PORT } = process.env
+  if (SERVER_ORIGIN && SERVER_PORT) {
+    return `${SERVER_ORIGIN}:${SERVER_PORT}`
+  }
+  return 'http://localhost:3001'
 }
 
 export const getToken = () => {
