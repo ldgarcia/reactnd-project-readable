@@ -17,6 +17,11 @@ export function fetchPost(category, postId) {
           comments,
         }))
       }
+      else {
+        dispatch({
+          type: types.FETCH_POST_NOT_FOUND,
+        })
+      }
     })
     .catch(exception => dispatch({
       type: types.FETCH_POST_FAILURE,
@@ -156,7 +161,34 @@ export function editPost(post) {
   }
 }
 
-export function deletePost(postId) {
+export function deletePostStart(id, redirect=false) {
+  return dispatch => {
+    dispatch({
+      type: types.FORM_LOAD_DATA,
+      name: 'deletePost',
+      data: {id, redirect}
+    })
+    dispatch({
+      type: types.OPEN_MODAL,
+      name: 'deletePost',
+    })
+  }
+}
+
+export function deletePostEnd() {
+  return dispatch => {
+    dispatch({
+      type: types.FORM_RESET,
+      name: 'deletePost',
+    })
+    dispatch({
+      type: types.CLOSE_MODAL,
+      name: 'deletePost',
+    })
+  }
+}
+
+export function deletePost(postId, redirect=false) {
   return dispatch => {
     dispatch({
       type: types.DELETE_POST_REQUEST,
@@ -166,6 +198,7 @@ export function deletePost(postId) {
     .then(post => dispatch({
       type: types.DELETE_POST_SUCCESS,
       post,
+      redirect,
     }))
     .catch(exception => dispatch({
       type: types.DELETE_POST_FAILURE,

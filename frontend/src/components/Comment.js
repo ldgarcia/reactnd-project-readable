@@ -6,9 +6,9 @@ import Votes from './Votes'
 function Comment(props) {
   const {
     comment,
-    voteComment,
-    deleteComment,
     editCommentStart,
+    deleteCommentStart,
+    voteComment,
   } = props
 
   return (
@@ -34,7 +34,7 @@ function Comment(props) {
         &nbsp;
         <button
           className="btn btn-sm btn-secondary"
-          onClick={() => deleteComment(comment.id)}
+          onClick={() => deleteCommentStart(comment.id)}
         >
           Delete
         </button>

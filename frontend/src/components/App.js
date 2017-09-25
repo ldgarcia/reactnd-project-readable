@@ -9,6 +9,8 @@ import AddPost from '../containers/AddPost'
 import EditPost from '../containers/EditPost'
 import AddComment from '../containers/AddComment'
 import EditComment from '../containers/EditComment'
+import DeleteComment from '../containers/DeleteComment'
+import DeletePost from '../containers/DeletePost'
 
 function App() {
   return (
@@ -29,8 +31,10 @@ function App() {
       </Switch>
       <AddPost />
       <EditPost />
+      <DeletePost />
       <AddComment />
       <EditComment />
+      <DeleteComment />
     </div>
   )
 }

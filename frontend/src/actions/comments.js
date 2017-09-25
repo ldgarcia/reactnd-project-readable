@@ -111,6 +111,33 @@ export function editComment(comment) {
   }
 }
 
+export function deleteCommentStart(id) {
+  return dispatch => {
+    dispatch({
+      type: types.FORM_LOAD_DATA,
+      name: 'deleteComment',
+      data: {id}
+    })
+    dispatch({
+      type: types.OPEN_MODAL,
+      name: 'deleteComment',
+    })
+  }
+}
+
+export function deleteCommentEnd() {
+  return dispatch => {
+    dispatch({
+      type: types.FORM_RESET,
+      name: 'deleteComment',
+    })
+    dispatch({
+      type: types.CLOSE_MODAL,
+      name: 'deleteComment',
+    })
+  }
+}
+
 export function deleteComment(commentId) {
   return dispatch => {
     dispatch({

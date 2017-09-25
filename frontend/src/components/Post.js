@@ -10,8 +10,8 @@ function Post(props) {
     post,
     comments,
     editPostStart,
+    deletePostStart,
     votePost,
-    deletePost,
   } = props
   return (
     <div className="post">
@@ -47,7 +47,7 @@ function Post(props) {
               </button>
               <button
                 className="card-link btn btn-sm btn-secondary"
-                onClick={(e) => deletePost(post.id)}
+                onClick={(e) => deletePostStart(post.id, true)}
               >
                 Delete
               </button>

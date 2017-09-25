@@ -16,6 +16,10 @@ const initialState = {
     title: '',
     body: '',
   },
+  deletePost: {
+    id: null,
+    redirect: false,
+  },
   addComment: {
     parentId: null,
     body: '',
@@ -24,6 +28,9 @@ const initialState = {
   editComment: {
     id: null,
     body: ''
+  },
+  deleteComment: {
+    id: null,
   },
 }
 

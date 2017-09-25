@@ -7,30 +7,44 @@ import * as postActions from '../actions/posts'
 import * as formActions from '../actions/forms'
 import * as uiActions from '../actions/ui'
 import PostList from '../components/PostList'
+import PageNotFound from '../components/PageNotFound'
 
 class PostListContainer extends Component {
+  isValidCategory(category) {
+    return category === '' ||
+      this.props.categories.findIndex(c => c.path === category) !== -1
+  }
+
+  fetchPosts(category) {
+    if (this.isValidCategory(category)) {
+      this.props.fetchPosts(category)
+    }
+  }
+
   componentDidMount() {
-    const category = this.props.match.params.category || ''
-    this.props.fetchPosts(category)
+    this.fetchPosts(this.props.match.params.category || '')
   }
 
   componentWillReceiveProps(nextProps) {
     const category = this.props.match.params.category || ''
     const nextCategory = nextProps.match.params.category || ''
     if (category !== nextCategory) {
-      this.props.fetchPosts(nextCategory)
+      this.fetchPosts(nextCategory)
     }
   }
 
   render() {
-    return (
-      <PostList {...this.props } />
-    )
+    const category = this.props.match.params.category || ''
+    if (this.isValidCategory(category)) {
+      return (<PostList {...this.props } />)
+    }
+    return (<PageNotFound />)
   }
 }
 
-const mapStateToProps = ({ posts, comments, forms, ui}) => {
+const mapStateToProps = ({ categories, posts, comments, forms, ui}) => {
   return {
+    categories,
     posts: posts.map(post => {
       return {
         ...post,

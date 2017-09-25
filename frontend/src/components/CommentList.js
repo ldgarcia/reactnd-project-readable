@@ -12,8 +12,8 @@ function CommentList(props) {
     onInputChange,
     addCommentStart,
     editCommentStart,
+    deleteCommentStart,
     voteComment,
-    deleteComment,
   } = props
   return (
     <div className="comments">
@@ -40,9 +40,9 @@ function CommentList(props) {
         <Comment
           key={comment.id}
           comment={comment}
-          deleteComment={deleteComment}
-          voteComment={voteComment}
           editCommentStart={editCommentStart}
+          deleteCommentStart={deleteCommentStart}
+          voteComment={voteComment}
         />
       ))}
     </div>

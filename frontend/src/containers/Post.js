@@ -15,21 +15,28 @@ class PostContainer extends Component {
   }
 
   render() {
-    return typeof this.props.post.id !== 'undefined' ?
-      <Post { ...this.props } /> :
-      <PageNotFound />
+    const { post, postNotFound }  = this.props
+    if (!post) {
+      if (postNotFound) {
+        return (<PageNotFound />)
+      }
+      return null
+    }
+    return (<Post {...this.props} />)
   }
-
 }
 
-const mapStateToProps = ({posts, comments}, {match}) => {
+const mapStateToProps = ({posts, comments, ui}, {match}) => {
   const postIndex = posts.findIndex(post => {
     return match.params.postId === post.id
       && match.params.category === post.category
     })
+  const post = postIndex !== -1 ? posts[postIndex] : null
+  const postComments = postIndex !== -1 ? comments.filter(c => post.id === c.parentId): []
   return {
-    post: postIndex !== -1 ? posts[postIndex] : {},
-    comments: postIndex !== -1 ? comments.filter(comment => match.params.postId === comment.parentId): []
+    postNotFound: ui.postNotFound,
+    post,
+    comments: postComments,
   }
 }
 

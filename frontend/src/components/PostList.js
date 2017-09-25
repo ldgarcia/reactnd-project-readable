@@ -16,7 +16,7 @@ class PostList extends Component {
       onInputChange,
       addPostStart,
       editPostStart,
-      deletePost,
+      deletePostStart,
       votePost,
     } = this.props
     return (
@@ -72,7 +72,7 @@ class PostList extends Component {
                   &nbsp;
                   <button
                     className="btn btn-sm btn-secondary"
-                    onClick={() => deletePost(post.id)}
+                    onClick={() => deletePostStart(post.id)}
                   >
                     Delete
                   </button>
