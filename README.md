@@ -19,7 +19,7 @@ $ cd api-server
 $ npm install
 $ node server
 ````
-By default, the server runs on port `http://localhost:3001/`. You can change this by setting the `SERVER_PORT` and `SERVER_ORIGIN` environment variables.
+By default, the server runs on port `http://localhost:3001/`. You can change this by setting the `SERVER_ORIGIN` and `SERVER_PORT` environment variables.
 
 3. In another terminal window, install and start the frontend:
 ````bash
@@ -27,7 +27,7 @@ $ cd frontend
 $ npm install
 $ npm start
 ````
-Likewise, by default, the client sets the server address at `http://localhost:3001/`. You can change this by setting the same environment variables as above.
+Likewise, by default, the client sets the server address at `http://localhost:3001/`. You can change this by setting the environment variables `REACT_APP_SERVER_ORIGIN` and `REACT_APP_SERVER_PORT`.
 
 ## License
 * [`reddit-clone-server`](/api-server): ISC

@@ -1,9 +1,7 @@
 export const getURL = () => {
-  const { SERVER_ORIGIN, SERVER_PORT } = process.env
-  if (SERVER_ORIGIN && SERVER_PORT) {
-    return `${SERVER_ORIGIN}:${SERVER_PORT}`
-  }
-  return 'http://localhost:3001'
+  const serverOrigin = process.env.REACT_APP_SERVER_ORIGIN || 'http://localhost'
+  const serverPort = process.env.REACT_APP_SERVER_PORT || 3001
+  return `${serverOrigin}:${serverPort}`
 }
 
 export const getToken = () => {
