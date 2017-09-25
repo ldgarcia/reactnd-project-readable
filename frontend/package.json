@@ -1,7 +1,9 @@
 {
   "name": "reactnd-project-readable-client",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
+  "author": "Luis Diego García",
+  "license": "MIT",
   "dependencies": {
     "bootstrap": "4.0.0-alpha.6",
     "moment": "^2.18.1",
