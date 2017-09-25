@@ -1,5 +1,5 @@
 export const getURL = () => {
-  return process.env.APP_API_URL || 'http://localhost:3001'
+  return `${process.env.SERVER_ORIGIN}:${process.env.SERVER_PORT}` || 'http://localhost:3001'
 }
 
 export const getToken = () => {
